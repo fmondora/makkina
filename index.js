@@ -27,9 +27,36 @@ if (token) {
   require('beepboop-botkit').start(controller, { debug: true })
 }
 
-controller.on('file_shared', (bot, file) => {
-  
-  console.log(file.file_id);
+controller.on('file_shared', (bot, file ) => {
+
+  console.log(JSON.stringify(file));
+  //bot.reply(message, 'zizze（。 ㅅ  。）');
+  bot.api.im.open({
+          user: file.user_id
+      }, (err, res) => {
+          if (err) {
+              bot.botkit.log('Failed to open IM with user', err)
+          }
+          console.log(res);
+
+          bot.startConversation({
+              user: file.user_id,
+              channel: res.channel.id,
+              text: 'WOWZA... 1....2'
+          }, (err, convo) => {
+              if (err) { bot.botkit.log("Failed to do something again")}
+              convo.say('File accepted!')
+          });
+      })
+
+
+/*  bot.say({
+            text: 'file arrivato: ',
+            //username: 'U0280SJ6E'
+            channel: 'C2VDGNAG5'
+        });
+
+        */
 });
 
 controller.on('bot_channel_join', function (bot, message) {
