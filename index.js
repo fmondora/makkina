@@ -27,9 +27,22 @@ if (token) {
   require('beepboop-botkit').start(controller, { debug: true })
 }
 
+controller.on('file_shared', (bot, file) => {
+  
+  console.log(file.file_id);
+});
+
 controller.on('bot_channel_join', function (bot, message) {
   bot.reply(message, "I'm here!")
 })
+
+controller.hears(['tits'], 'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message, '（。 ㅅ  。）');
+});
+
+controller.hears(['boobs'], 'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message, '（。 Y  。）');
+});
 
 controller.hears(['hello', 'hi'], ['direct_mention'], function (bot, message) {
   bot.reply(message, 'Hello.')
@@ -43,6 +56,7 @@ controller.hears(['hello', 'hi'], ['direct_message'], function (bot, message) {
 controller.hears('.*', ['direct_message'], function (bot, message) {
   bot.reply(message, 'You really do care about makkina. :heart::heart::heart::heart::heart:')
 })
+
 
 controller.hears('help', ['direct_message', 'direct_mention'], function (bot, message) {
   var help = 'I will respond to the following messages: \n' +
