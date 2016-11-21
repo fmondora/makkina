@@ -67,6 +67,7 @@ controller.hears(['tits'], 'direct_message,direct_mention,mention', function(bot
     bot.reply(message, '（。 ㅅ  。）');
 });
 
+
 controller.hears(['boobs'], 'direct_message,direct_mention,mention', function(bot, message) {
     bot.reply(message, '（。 Y  。）');
 });
